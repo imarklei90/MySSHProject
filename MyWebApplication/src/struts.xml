@@ -6,15 +6,29 @@
 <struts>
 
     <package name="helloStruts" namespace="/" extends="struts-default">
+    	
         <action name="hello" class="cn.struts.action.HelloAction">
             <result name="success">/hello.jsp</result>
         </action>
     </package>
     
     <package name="helloStruts2" extends="struts-default" namespace="/">
+    	<!-- 配置全局结果页面 -->
+   		 <global-results>
+    		<result name="global">/global.jsp</result>
+    	</global-results>
+    
     	<action name="user_*" class="cn.struts.action.UserAction" method="{1}">
     		<result name="{1}">/hello.jsp</result>
     	</action>
     </package>
-
+	
+	<!-- 配置表单提交的Action -->
+	<package name="formAction" extends="struts-default" namespace="/">
+		<action name="form1" class="cn.struts.action.Form1Action"></action>
+		<action name="form2" class="cn.struts.action.Form2Action"></action>
+		<action name="form3" class="cn.struts.action.Form3Action"></action>
+		<action name="form4" class="cn.struts.action.Form4Action"></action>
+		<action name="form5" class="cn.struts.action.Form5Action"></action>
+	</package>
 </struts>
