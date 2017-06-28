@@ -10,5 +10,11 @@
             <result name="success">/hello.jsp</result>
         </action>
     </package>
+    
+    <package name="helloStruts2" extends="struts-default" namespace="/">
+    	<action name="user_*" class="cn.struts.action.UserAction" method="{1}">
+    		<result name="{1}">/hello.jsp</result>
+    	</action>
+    </package>
 
 </struts>

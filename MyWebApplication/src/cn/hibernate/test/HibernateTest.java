@@ -26,9 +26,9 @@ public class HibernateTest {
 		Transaction tx = session.beginTransaction();
 //		（5）写业务逻辑CRUD操作
 		User user = new User();
-		user.setUsername("hibernate2");
-		user.setPassword("1234567");
-		user.setAddress("america");
+		user.setUsername("Struts");
+		user.setPassword("123456");
+		user.setAddress("China");
 		// 调用session中到方法实现添加
 		session.save(user);
 //		（6）提交事务
