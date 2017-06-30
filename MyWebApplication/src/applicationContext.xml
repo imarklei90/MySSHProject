@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- IoC入门 -->
+	<bean id="user" class="cn.spring.ioc.User"></bean>
+	
+	<!-- 注入对象类型属性 -->
+	<bean id="userDao" class="cn.spring.entity.UserDao"></bean>	
+
+	<bean id="userService" class="cn.spring.entity.UserService">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+</beans>
