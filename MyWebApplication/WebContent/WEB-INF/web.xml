@@ -7,6 +7,18 @@
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
     </filter>
+    
+    <!-- Spring整个Web项目 -->
+    <!-- 指定Spring配置文件的位置 -->
+    <context-param>
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>classpath:spring-web.xml</param-value>
+    </context-param>
+    
+    <!-- 配置监听器 -->
+    <listener>
+    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
     <filter-mapping>
         <filter-name>struts2</filter-name>

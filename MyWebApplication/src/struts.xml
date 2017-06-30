@@ -31,4 +31,10 @@
 		<action name="form4" class="cn.struts.action.Form4Action"></action>
 		<action name="form5" class="cn.struts.action.Form5Action"></action>
 	</package>
+	
+	<!-- Spring整合web配置 -->
+	<package name="web" extends="struts-default" namespace="/">
+		<action name="userAction" class="cn.spring.web.action.UserAction"></action>
+	</package>
+	
 </struts>

@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.apple.eawt.Application;
 
+import cn.spring.aop.Book;
 import cn.spring.entity.UserService;
 import cn.spring.ioc.User;
 import cn.spring.xmlannotation.BookService;
@@ -50,4 +51,12 @@ public class TestCase {
 		BookService bookService = (BookService) context.getBean("bookService");
 		bookService.book();
 	}
+	
+	@Test //测试Aop
+	public void testAop(){
+		ApplicationContext context = new ClassPathXmlApplicationContext("aop.xml");
+		Book book = (Book) context.getBean("book");
+		book.add();
+	}
+	
 }
