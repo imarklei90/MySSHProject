@@ -14,6 +14,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
 import sun.launcher.resources.launcher;
 
 
@@ -107,7 +109,7 @@ public class JdbcTemplateTest {
 		String sql = "select * from user";
 		List<User> user = jdbcTemplate.query(sql, new MyRowMapper());
 		System.out.println(user);
-		
+		ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
 	}
 }
 
