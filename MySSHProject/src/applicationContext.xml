@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 配置c3p0的连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- 注入属性值 -->
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+		<property name="jdbcUrl" value="jdbc:mysql:///ssh"></property>
+		<property name="user" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	
+	<!-- SessionFactpry的创建交给Spring进行管理 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- 因为在Hibernat的核心配置文件中没有数据库的配置，所以需要注入dataSource-->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 指定使用的Hibernate的核心配置文件 -->
+		<property name="configLocations" value="classpath:hibernate.cfg.xml"></property>
+	</bean>
+	
+	<!-- 配置事务管理器 -->
+	<bean id="hibernateTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<!-- 注入SessionFactory -->
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 开启事务注解 -->
+	<tx:annotation-driven transaction-manager="hibernateTransactionManager"/>
+
+	
+	<!-- 使用Spring管理Struts2中的Action 
+		scope:prototype表示多实例对象
+	-->
+	<bean id="userAction" class="cn.ssh.action.UserAction" scope="prototype">
+		<!-- 注入userService -->
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<!-- UserService对象 -->
+	<bean id="userService" class="cn.ssh.service.UserService">
+		<!-- 注入UserDao对象 (接口=实现类对象)-->
+		<property name="userDao" ref="userDaoImpl"></property>
+	</bean>
+	
+	<!-- UserDao对象 ,创建实现类对象-->
+	<bean id="userDaoImpl" class="cn.ssh.dao.UserDaoImpl">
+		<!-- 注入HibernateTemplate对象 -->
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	
+	<!-- 配置hibernateTemplate -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+		<!-- 注入SessionFactory -->
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+</beans>

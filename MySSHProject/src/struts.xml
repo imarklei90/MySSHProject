@@ -5,6 +5,9 @@
 
 <struts>
 	<package name="UserAction" extends="struts-default" namespace="/">
-		<action name="userAction" class="cn.ssh.action.UserAction"></action>
+		<!-- class属性不写Action的全路径了，否则Action会创建两次
+			写 Spring中配置的action的bean的ID值
+		 -->
+		<action name="userAction" class="userAction"></action>
 	</package>
 </struts>
