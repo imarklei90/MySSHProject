@@ -33,7 +33,7 @@ public class MyBatisTest {
 		//	释放资源
 		sqlSession.close();
 	}
-	
+	 
 	// 根据用户名模糊查询
 	@Test
 	public void testFindUserByName() throws IOException{
@@ -42,4 +42,34 @@ public class MyBatisTest {
 		System.out.println(lists);
 		sqlSession.close();
 	}
+	
+	// 添加用户信息
+	@Test
+	public void insertUser() throws IOException{
+		SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("SqlMapConfig.xml")).openSession();
+		User user = new User();
+		user.setUsername("mybatis");
+		user.setPassword("mybatis");
+		sqlSession.insert("test.insertUser", user);
+		
+		// 提交事务
+		sqlSession.commit();
+		System.err.println(user.getId());
+		
+		sqlSession.close();
+	}
+	
+	// 删除用户
+	@Test
+	public void deleteUser() throws IOException{
+		SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("SqlMapConfig.xml")).openSession();
+		sqlSession.delete("test.deleteUser", 2);
+		
+		// 提交事务
+		sqlSession.commit();
+		
+		sqlSession.close();
+	}
+	
+	// 更新用户
 }
