@@ -4,7 +4,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <!-- 对sql进行分类化管理，理解sql隔离 -->
 <mapper namespace="test">
-  <select id="selectBlog" resultType="Blog">
-    select * from Blog where id = #{id}
+  <!-- 在映射文件中配置sql语句 -->
+  <!-- 配置Sql查询语句 
+  	id:标示映射文件的sql
+  	将sql语句封装到mapperedStatement对象中，所以ID也被称为Statement的ID
+  	parameterType:指定输入参数的类型
+  	#{} 标示占位符
+  	#{id}:id表示接收输入的参数，如果输入参数是简单类型，#{}中的参数名可以是任意的
+  	resultType：指定sql输出结果所映射的java对象类型，select指定resultType表示将单条记录映射成的java对象
+  -->
+  <select id="findUserById" parameterType="int" resultType="cn.mybatis.entity.User">
+  	SELECT * FROM USER WHERE id=#{id}
+  </select>
+  
+  <!-- 根据用户名模糊查询 
+  	${}:表示拼接字符串，将接收到的参数的内容拼接到sql中
+  	${value}:接收输入参数的内容，如果传入的是简单类型，${}中只能使用value
+  -->
+  <select id="findUserByName" parameterType="java.lang.String" resultType="cn.mybatis.entity.User">
+  	SELECT * FROM USER WHERE username LIKE '%${value}%'
   </select>
 </mapper>
