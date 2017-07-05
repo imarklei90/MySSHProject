@@ -63,7 +63,7 @@ public class MyBatisTest {
 	@Test
 	public void deleteUser() throws IOException{
 		SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("SqlMapConfig.xml")).openSession();
-		sqlSession.delete("test.deleteUser", 2);
+		sqlSession.delete("test.deleteUser", 3);
 		
 		// 提交事务
 		sqlSession.commit();
@@ -72,4 +72,19 @@ public class MyBatisTest {
 	}
 	
 	// 更新用户
+	public void updateUser() throws IOException{
+		SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("SqlMapConfig.xml")).openSession();
+		
+		User user = new User();
+		user.setId(8);
+		user.setUsername("ADMIN");
+		user.setPassword("ADMIN123");
+		
+		sqlSession.update("test.updateUser", user);
+		
+		// 提交事务
+		sqlSession.commit();
+		
+		sqlSession.close();
+	}
 }
