@@ -60,5 +60,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javassist-3.21.0-GA.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mybatis-3.4.4.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-webmvc-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsp-api-2.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl-1.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
